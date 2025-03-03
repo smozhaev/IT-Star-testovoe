@@ -1,0 +1,25 @@
+html,
+body {
+    overflow-x: hidden; // ✅ Убирает горизонтальный скролл
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 35px;
+    font-weight: 800;
+    color: #4c73e3;
+    margin-top: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; // ✅ Вместо фиксированного height
+    width: 100%;
+    overflow: auto; // ✅ Добавляем скролл при необходимости
+}

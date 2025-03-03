@@ -14,7 +14,11 @@ export const useSeminars = () => {
                 const data = await getSeminars();
                 setSeminars(data);
             } catch (error) {
-                setError(`Ошибка загрузки данных: ${error}`);
+                setError(
+                    error instanceof Error
+                        ? error.message
+                        : 'Ошибка загрузки данных'
+                );
             } finally {
                 setLoading(false);
             }

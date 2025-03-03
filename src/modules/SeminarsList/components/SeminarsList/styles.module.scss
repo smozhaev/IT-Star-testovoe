@@ -1,52 +1,118 @@
-// SeminarsList.module.scss
-
 .container {
-    max-width: 600px;
-    margin: 20px auto;
+    max-width: 1200px; //  Расширяем для нормального отображения на десктопе
+    width: 100%;
+    height: 720px;
+    margin: 0 auto;
     padding: 20px;
+    overflow-y: auto;
     border-radius: 8px;
     background-color: #f8f9fa;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.list {
-    list-style: none;
-    padding: 0;
+/*  Сетка карточек */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(250px, 1fr)
+    ); // Динамическая сетка
+    gap: 20px;
+    justify-content: center;
+    align-items: start;
 }
 
-.item {
-    background: white;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition:
-        transform 0.2s,
-        box-shadow 0.2s;
+/*  Стилизация скроллбара */
+.container::-webkit-scrollbar {
+    width: 8px;
 }
 
-.item:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+.container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 4px;
 }
 
-.title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
+.container::-webkit-scrollbar-thumb {
+    background: #8299dd;
+    border-radius: 4px;
 }
 
-.description {
-    font-size: 14px;
-    color: #666;
+.container::-webkit-scrollbar-thumb:hover {
+    background: #8299dd;
 }
 
+/* Ошибки и загрузка */
 .error {
     color: red;
     text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
+    font-weight: 900;
 }
 
 .loading {
+    font-family: 'Inter', sans-serif;
+    font-size: 60px;
+    font-weight: 900;
     text-align: center;
     font-style: italic;
+    color: #4c73e3;
+    font-weight: bold;
+    padding: 10px;
+    animation: blink 1.5s infinite;
+}
+
+/* Анимация мерцания загрузки */
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 1536px) {
+    .container {
+        max-width: 900px;
+        max-height: 650px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(250px, 1fr)
+        ); //  Уменьшаем карточки
+    }
+}
+
+@media (max-width: 1280px) {
+    .container {
+        max-width: 800px;
+        max-height: 500px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(250px, 1fr)
+        ); //  Уменьшаем карточки
+    }
+}
+
+@media (max-width: 1098px) {
+    .container {
+        max-width: 800px;
+        max-height: 430px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(250px, 1fr)
+        ); // Уменьшаем карточки
+    }
 }

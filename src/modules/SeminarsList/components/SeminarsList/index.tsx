@@ -1,25 +1,25 @@
 import { useSeminars } from '../../hooks/useSeminars';
+import { SeminarCard } from '../SeminarCard';
 import styles from './styles.module.scss';
+
 export const SeminarsList = () => {
     const { seminars, loading, error } = useSeminars();
 
-    if (loading) return <p className={styles.loading}>Загрузка...</p>;
-    if (error) return <p className={styles.error}>{error}</p>;
-
     return (
         <div className={styles.container}>
-            <ul className={styles.list}>
-                {seminars.map((seminar) => (
-                    <li key={seminar.id} className={styles.item}>
-                        <p className={styles.title}>{seminar.title}</p>
-                        <p className={styles.description}>
-                            {seminar.description}
-                        </p>
-                    </li>
-                ))}
-            </ul>
+            <div className={styles.grid}>
+                {loading && <p className={styles.loading}>Загрузка...</p>}
+                {error && (
+                    <p className={styles.error}>
+                        Ошибка загрузки данных: {error}
+                    </p>
+                )}
+                {!loading &&
+                    !error &&
+                    seminars.map((seminar) => (
+                        <SeminarCard key={seminar.id} seminar={seminar} />
+                    ))}
+            </div>
         </div>
     );
 };
-
-// компонент списка семинаров
