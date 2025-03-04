@@ -1,17 +1,17 @@
 import styles from './styles.module.scss';
-import { EditFormButton } from '@modules/EditForm';
 import { DeleteButton } from '@modules/DeleteCard';
+import { OpenEditFormButton } from '@modules/EditForm';
 import { Seminar } from '@modules/SeminarsList/types/types';
 
 interface SeminarCardProps {
     seminar: Seminar;
 }
 
-export const SeminarCard = ({ seminar }: SeminarCardProps) => {
+export const SeminarCard: React.FC<SeminarCardProps> = ({ seminar }) => {
     return (
         <div className={styles.card}>
             <div className={styles.feature}>
-                <EditFormButton cardId={seminar.id} />
+                <OpenEditFormButton card={seminar} />
                 <DeleteButton />
             </div>
             <img

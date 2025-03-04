@@ -1,32 +1,39 @@
+import { Seminar } from '@modules/SeminarsList';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface EditFormState {
     isOpen: boolean;
-    selectedCardId: number | null;
+    selectedCard: Seminar | null;
+    isEdited: boolean;
 }
 
 const initialState: EditFormState = {
     isOpen: false,
-    selectedCardId: null,
+    selectedCard: null,
+    isEdited: false,
 };
 
 export const editFormSlice = createSlice({
     name: 'editForm',
     initialState,
     reducers: {
-        openEditForm: (state, action: PayloadAction<number>) => {
+        openEditForm: (state, action: PayloadAction<Seminar>) => {
             state.isOpen = true;
-            state.selectedCardId = action.payload;
+            state.selectedCard = action.payload;
         },
         closeEditForm: (state) => {
             state.isOpen = false;
-            state.selectedCardId = null;
+            state.selectedCard = null;
+        },
+        formIsEdited: (state, action: PayloadAction<boolean>) => {
+            state.isEdited = action.payload;
         },
     },
 });
 
 // Экспортируем экшены
-export const { openEditForm, closeEditForm } = editFormSlice.actions;
+export const { openEditForm, closeEditForm, formIsEdited } =
+    editFormSlice.actions;
 
 // Экспортируем редьюсер
 export default editFormSlice.reducer;
