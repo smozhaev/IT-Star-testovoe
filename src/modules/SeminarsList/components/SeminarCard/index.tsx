@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import { DeleteButton } from '@modules/DeleteCard';
+import { DeleteButton } from '@modules/DeleteSeminar';
 import { OpenEditFormButton } from '@modules/EditSeminar';
 import { Seminar } from '@modules/SeminarsList/types/types';
 
@@ -12,7 +12,7 @@ export const SeminarCard: React.FC<SeminarCardProps> = ({ seminar }) => {
         <div className={styles.card}>
             <div className={styles.feature}>
                 <OpenEditFormButton card={seminar} />
-                <DeleteButton />
+                <DeleteButton card={seminar} />
             </div>
             <img
                 className={styles.image}

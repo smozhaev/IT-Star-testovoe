@@ -1,25 +1,25 @@
 import { Seminar } from '@modules/SeminarsList';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface EditFormState {
+interface DeleteState {
     isOpen: boolean;
     selectedCard: Seminar | null;
 }
 
-const initialState: EditFormState = {
+const initialState: DeleteState = {
     isOpen: false,
     selectedCard: null,
 };
 
-export const editFormSlice = createSlice({
-    name: 'editForm',
+export const deleteSlice = createSlice({
+    name: 'delete',
     initialState,
     reducers: {
-        openEditForm: (state, action: PayloadAction<Seminar>) => {
+        openDelete: (state, action: PayloadAction<Seminar>) => {
             state.isOpen = true;
             state.selectedCard = action.payload;
         },
-        closeEditForm: (state) => {
+        closeDelete: (state) => {
             state.isOpen = false;
             state.selectedCard = null;
         },
@@ -27,7 +27,7 @@ export const editFormSlice = createSlice({
 });
 
 // Экспортируем экшены
-export const { openEditForm, closeEditForm } = editFormSlice.actions;
+export const { openDelete, closeDelete } = deleteSlice.actions;
 
 // Экспортируем редьюсер
-export default editFormSlice.reducer;
+export default deleteSlice.reducer;
