@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styles from './styles.module.scss';
-import { formatDate } from '@modules/EditForm/helpers/formatDate';
+import { Seminar } from '@modules/SeminarsList';
+import { useEditForm } from '@modules/EditSeminar/hooks/useEditForm'; // Импортируем хук
 import {
     MAX_TITLE_LENGTH,
     MAX_DESCRIPTION_LENGTH,
-} from '@modules/EditForm/constants';
-import { Seminar } from '@modules/SeminarsList';
-import { dateRestrictions } from '@modules/EditForm/helpers/dateRestrictions';
-import { updateSeminar } from '@modules/EditForm/api/updateSeminars';
-import { formatDateBack } from '@modules/EditForm/helpers/formatDateBack';
+} from '@modules/EditSeminar/constants';
 
 interface EditFormProps {
     initialData: Seminar;
@@ -21,43 +18,13 @@ export const EditForm: React.FC<EditFormProps> = ({
     onClose,
     onSubmit,
 }) => {
-    const [formData, setFormData] = useState(initialData);
-    const [minDateFormatted, maxDateFormatted] = dateRestrictions();
-
-    useEffect(() => {
-        setFormData({
-            ...initialData,
-            date: formatDate(initialData.date), // Форматируем дату при загрузке
-        });
-    }, [initialData]);
-
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
-        const { name, value } = e.target;
-
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-
-        const formattedDate = formatDateBack(formData.date);
-
-        const updatedData = {
-            ...formData,
-            date: formattedDate,
-        };
-
-        updateSeminar(updatedData.id, updatedData);
-
-        (e.currentTarget as HTMLFormElement).requestSubmit();
-        onSubmit();
-        onClose();
-    };
+    const {
+        formData,
+        minDateFormatted,
+        maxDateFormatted,
+        handleChange,
+        handleSubmit,
+    } = useEditForm(initialData, onClose, onSubmit); // Используем кастомный хук
 
     return (
         <div className={styles.editForm}>

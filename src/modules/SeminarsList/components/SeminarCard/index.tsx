@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 import { DeleteButton } from '@modules/DeleteCard';
-import { OpenEditFormButton } from '@modules/EditForm';
+import { OpenEditFormButton } from '@modules/EditSeminar';
 import { Seminar } from '@modules/SeminarsList/types/types';
 
 interface SeminarCardProps {

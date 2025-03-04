@@ -1,7 +1,6 @@
 import { EditSvg } from '../EditSvg';
 import styles from './styles.module.scss';
-import { editFormSlice } from '@modules/EditForm';
-import { AppDispatch } from '@app/store';
+import { AppDispatch, editFormSlice } from '@app/store';
 import { useDispatch } from 'react-redux';
 import { Seminar } from '@modules/SeminarsList';
 
@@ -14,7 +13,7 @@ export const OpenEditFormButton: React.FC<IOpenEditFormProps> = ({ card }) => {
     return (
         <button
             className={styles.edit_button}
-            onClick={() => dispatch(editFormSlice.actions.openEditForm(card))}
+            onClick={() => dispatch(editFormSlice.actions.openEditForm(card))} //передаем в форму через Redux данные карточки которые будем редактировать
         >
             <span>
                 <EditSvg />
