@@ -1,7 +1,8 @@
+import React from 'react';
 import { Seminar } from '@modules/SeminarsList';
-import React, { useState, useEffect } from 'react';
-import { deleteSeminar } from '@modules/DeleteSeminar/api/deleteSeminar';
+
 import styles from './styles.module.scss';
+import { useDeleteConfirmation } from '@modules/DeleteSeminar/hooks/useDeleteConfirmation';
 
 interface DeleteConfirmationProps {
     targetToDelete: Seminar;
@@ -14,52 +15,34 @@ export const DeleteConfirmation: React.FC<DeleteConfirmationProps> = ({
     onDelete,
     onCancel,
 }) => {
-    const [disabled, setDisabled] = useState(true);
-    const [timer, setTimer] = useState(5);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTimer((prev) => {
-                if (prev === 1) {
-                    clearInterval(interval);
-                    setDisabled(false);
-                    return 0;
-                }
-                return prev - 1;
-            });
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    const handleDelete = () => {
-        deleteSeminar(targetToDelete.id);
-        onDelete();
-        onCancel();
-    };
+    const { timer, disabled, handleDelete } = useDeleteConfirmation({
+        targetToDelete,
+        onDelete,
+        onCancel,
+    });
 
     return (
-        <div className={styles.container}>
-            <h3 className={styles.title}>
+        <div className={styles.deleteConfirmation}>
+            <h3 className={styles.deleteConfirmation__title}>
                 Вы уверены, что хотите удалить?
                 <br />
                 {targetToDelete.title}
             </h3>
-            <p className={styles.timer}>
+            <p className={styles.deleteConfirmation__timer}>
                 Кнопка удаления будет доступна через:{' '}
                 <strong>{timer} сек</strong>
             </p>
-            <div className={styles.buttons}>
+            <div className={styles.deleteConfirmation__actions}>
                 <button
                     onClick={handleDelete}
                     disabled={disabled}
-                    className={`${styles.button} ${styles.delete}`}
+                    className={`${styles.deleteConfirmation__button} ${styles.delete}`}
                 >
                     Удалить
                 </button>
                 <button
                     onClick={onCancel}
-                    className={`${styles.button} ${styles.cancel}`}
+                    className={`${styles.deleteConfirmation__button} ${styles.cancel}`}
                 >
                     Отмена
                 </button>
