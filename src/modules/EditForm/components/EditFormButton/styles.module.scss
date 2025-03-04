@@ -1,0 +1,24 @@
+.edit_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: none;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    margin: 8px;
+    span {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &:active {
+        opacity: 0.8;
+        scale: (0.9);
+    }
+}

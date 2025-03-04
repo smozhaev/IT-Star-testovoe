@@ -1,5 +1,7 @@
-import { Seminar } from '@modules/SeminarsList/types/types';
 import styles from './styles.module.scss';
+import { EditFormButton } from '@modules/EditForm';
+import { DeleteButton } from '@modules/DeleteCard';
+import { Seminar } from '@modules/SeminarsList/types/types';
 
 interface SeminarCardProps {
     seminar: Seminar;
@@ -8,6 +10,10 @@ interface SeminarCardProps {
 export const SeminarCard = ({ seminar }: SeminarCardProps) => {
     return (
         <div className={styles.card}>
+            <div className={styles.feature}>
+                <EditFormButton cardId={seminar.id} />
+                <DeleteButton />
+            </div>
             <img
                 className={styles.image}
                 src={seminar.photo}
