@@ -1,8 +1,9 @@
 # IT-Star-testovoe
 
 Test task in IT-Star
+![alt text](image.png)
 
-# React + TypeScript + Vite
+## React + TypeScript + Vite + Redux Toolkit
 
 ## 🚦 Быстрый запуск
 
